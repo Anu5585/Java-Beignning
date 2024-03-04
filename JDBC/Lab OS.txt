@@ -1,0 +1,23 @@
+gcc --version
+sudo apt-get gcc 
+
+clear 
+control + l 
+
+now hello world program in c
+#include <stdio.h>
+int main (int arr , char **argv)
+{
+printf("Annas");
+return 0;
+}
+
+cmds to run : 
+
+cd Desktop 
+touch hello.c // file ban gai 
+gcc gcc hello.c -o test  // for compile and run 
+
+
+fork() //child create krta h header file chye = 
+#include<unistd.h>

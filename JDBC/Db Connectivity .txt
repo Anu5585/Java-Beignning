@@ -1,0 +1,127 @@
+Db Connectivity 
+download mysql connector.j
+
+
+Extract And Copy Jar file :  it is necessary for mysql db connection
+Goto Idea Make new project 
+Jo Hmara project Name h uspy right click and paste Jar file jo hmny copy ki thi us sy ZIP file a jye gi idea mn 
+Right click on ZIP file and Add as library 
+Expand  : ZIP File Then Expand com.mysql then Expand jdbc
+Now We need that path like (k expand k bd  ye path h esy: com.mysql.jdbc.Driver)
+complete line esy :  Class.forName(" com.mysql.jdbc.Driver");
+Ab ye  forName  error dyga to usk lie hmy try catch method ki zururat h jo k IntelliJ idea hmy khud e bna deta h esy :
+us k lie click on error other more Action Surround with try catch  us k bad esa code ban jaye ga: 
+
+  try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+ismn Apni mrzi ka msg dy skty h jo k sout nechy exp mn h : 
+
+     try {
+            Class.forName(" com.mysql.jdbc.Driver");
+            System.out.println("Driver Loaded...");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver Not found on class path ...");
+        }
+
+
+now make a mysql table which we want to get or give data :
+in MySQL :
+create schema like:
+create database db;
+use db ;
+and now run and make a table manually  what we want to store like id username password email etc. then apply then refreah schema , then on a schemea table Third icon touch on it and add
+name pswd email  but not id . then apply and again apply .
+
+now we need to make connection code in java to get that deta like this : 
+DriverManager.getConnection("jdbc:mysql://loaclhost/Dbconnection"); //  jdbc:mysql://loaclhost/Dbconnection  ye path hmesha esy rhta h bs Dbconnection ki jaga hmra actual db ka name ata h
+jo hmny rkha hota h ab isko 1 variable mn store krnaa h esy : 
+
+Connection con = DriverManager.getConnection("jdbc:mysql://loaclhost/Dbconnection");   ye phr error dyga so isko b try catch mn wrap krna pry ga wese e jesy uper b kiya tha eg :
+
+
+ try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://loaclhost/Dbconnection","Dbconnection","admin");  userr name and pswd must MySql ka 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+line by line with exp: 
+Statement stmt = con.createStatement();  // con: This likely refers to a Connection object, which represents a connection to a database.    
+					Statement() method is typically a method provided by the Connection class.
+					con.createStatement(): This method is called on the Connection object (con). It returns a Statement object, which is an interface in Java used 
+					to execute SQL queries. The createStatement() method is used to create a Statement object associated with the current connection.
+					Statement stmt: This line declares a variable named stmt of type Statement, which will be used to store the reference to the Statement object 
+					created in the previous step.
+					After this line is executed, you can use the stmt object to execute SQL queries on the associated database using methods like executeQuery() 
+					for SELECT statements or executeUpdate() for INSERT, UPDATE, or DELETE statements.
+
+
+String sql = "select * from Dbconnection " ; // String sql: This declares a variable named sql of type String. This variable will hold the SQL query.
+					    "select * from Dbconnection": This is the SQL query string assigned to the variable sql. Breaking it down:
+					    select *: This part of the query selects all columns from the specified table.
+					    from Dbconnection:This part specifies the table from which to retrieve the data. In this case, it assumes there is a table named "Dbconnection"
+
+	
+ResultSet rs = stmt.executeQuery(sql);	// ResultSet = reserve word
+					sql: This is a string variable that contains a SQL query. In your case, it's "select * from Dbconnection".
+					stmt.executeQuery(sql): This method is called on the Statement object (stmt) to execute the SQL query specified in the sql string. 
+					It is specifically used for SELECT queries that retrieve data from the database.
+					ResultSet rs: This line declares a ResultSet variable named rs, which is used to hold the result set of the executed query. 
+					The result set contains the rows and columns returned by the SQL SELECT query.
+
+ while (rs.next()){
+System.out.println(rs.getInt("id"));
+System.out.println(rs.getString("username"));
+System.out.println(rs.getString("password"));
+}  rs.next(): The next() method of the ResultSet moves the cursor to the next row in the result set. It returns true if there is a next row, and false if there are no more rows.
+
+Full Code : 
+import java.sql.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver Loaded...");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver Not found on class path ...");
+        }
+
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Dbconnection", "root", "admin");
+            Statement stmt = con.createStatement();
+            String sql = "select * from Dbconnection";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id"));
+                System.out.println(rs.getString("username"));
+                System.out.println(rs.getString("password"));
+            }
+
+            // Close resources
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
