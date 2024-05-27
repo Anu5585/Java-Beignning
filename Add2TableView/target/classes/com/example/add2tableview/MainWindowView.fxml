@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="558.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.add2tableview.MainWindowController">
+   <children>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="82.0" prefHeight="505.0" prefWidth="493.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="firstNameColumn" prefWidth="200.0" text="FirstName" />
+            <TableColumn fx:id="ageColumn" prefWidth="100.0" text="Age" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="200.0" text="LastName" />
+        </columns>
+
+      </TableView>
+      <Button fx:id="btnClose" layoutX="351.0" layoutY="513.0" mnemonicParsing="false" onAction="#closeButtonClick" text="Insert Name" />
+   </children>
+</AnchorPane>
