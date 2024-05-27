@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="311.0" prefWidth="275.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <Label text="Weight(kg)" />
+    <TextField fx:id="txtWeight" />
+    <Label text="Height(cm)" />
+    <TextField fx:id="txtHeight" prefHeight="25.0" prefWidth="195.0" />
+    <RadioButton fx:id="metric" text="Metric Unit">
+        <toggleGroup>
+            <ToggleGroup fx:id="group" />
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="english" text="English Unit" toggleGroup="$group" />
+    <Label fx:id="bmiOutput" text="" />
+    <Label fx:id="bmiCategory" text="" />
+</VBox>
