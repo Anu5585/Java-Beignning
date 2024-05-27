@@ -1,0 +1,14 @@
+/*Text.css - text with CSS */
+
+#mytext{
+	-fx-font-size: 50px;
+	-fx-font-family: verdana;
+	-fx-fill: lightsalmon;
+	-fx-stroke: darkblue;
+	-fx-stroke-width: 2;
+	-fx-underline: true;
+	-fx-font-weight: bold;
+	-fx-font-style: italic;
+
+
+}
