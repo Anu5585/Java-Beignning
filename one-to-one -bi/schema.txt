@@ -1,0 +1,18 @@
+schema
+
+CREATE TABLE `person` (
+  `personId` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`personId`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `address` (
+  `addressId` int(11) NOT NULL AUTO_INCREMENT,
+  `house` varchar(45) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `person_personId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`addressId`),
+  UNIQUE KEY `person_personId` (`person_personId`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`person_personId`) REFERENCES `person` (`personId`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
